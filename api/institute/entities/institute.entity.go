@@ -5,4 +5,5 @@ type Institute struct {
 	InstituteName string `gorm:"type:varchar(255)" json:"institute_name"`
 	Email         string `gorm:"uniqueIndex;type:varchar(255)" json:"email"`
 	Password      string `gorm:"varchar(255)" json:"password"`
+	Token         string `gorm:"-" json:"token,omitempty"`
 }
