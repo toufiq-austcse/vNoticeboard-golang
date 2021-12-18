@@ -1,7 +1,7 @@
 package repositories
 
 import (
-	"gihub.com/toufiq-austcse/vNoticeboard/api/institute/entities"
+	"gihub.com/toufiq-austcse/vNoticeboard/api/entities"
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 	"log"

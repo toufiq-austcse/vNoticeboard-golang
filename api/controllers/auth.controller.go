@@ -1,8 +1,8 @@
 package controllers
 
 import (
-	"gihub.com/toufiq-austcse/vNoticeboard/api/auth/dtos/req"
-	"gihub.com/toufiq-austcse/vNoticeboard/api/auth/services"
+	"gihub.com/toufiq-austcse/vNoticeboard/api/dto/req"
+	"gihub.com/toufiq-austcse/vNoticeboard/api/services"
 	"gihub.com/toufiq-austcse/vNoticeboard/common/helper"
 	"github.com/gin-gonic/gin"
 	"net/http"
@@ -14,7 +14,7 @@ type AuthController struct {
 	jwtService  services.JwtService
 }
 
-func New(authService services.AuthService, jwtService services.JwtService) AuthController {
+func NewAuthController(authService services.AuthService, jwtService services.JwtService) AuthController {
 	return AuthController{authService: authService, jwtService: jwtService}
 }
 

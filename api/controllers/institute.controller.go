@@ -1,11 +1,10 @@
 package controllers
 
 import (
-	"gihub.com/toufiq-austcse/vNoticeboard/api/institute/services"
+	"gihub.com/toufiq-austcse/vNoticeboard/api/services"
 )
 
-
-type  InstituteController struct {
+type InstituteController struct {
 	service services.InstituteService
 }
 
@@ -14,4 +13,3 @@ func NewInstituteController(service services.InstituteService) InstituteControll
 		service: service,
 	}
 }
-

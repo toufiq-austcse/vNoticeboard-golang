@@ -1,12 +1,11 @@
 package main
 
 import (
-	authController "gihub.com/toufiq-austcse/vNoticeboard/api/auth/controllers"
-	authService "gihub.com/toufiq-austcse/vNoticeboard/api/auth/services"
+	"gihub.com/toufiq-austcse/vNoticeboard/api/controllers"
+	"gihub.com/toufiq-austcse/vNoticeboard/api/repositories"
+	"gihub.com/toufiq-austcse/vNoticeboard/api/services"
 	"gihub.com/toufiq-austcse/vNoticeboard/common/middleware"
 
-	"gihub.com/toufiq-austcse/vNoticeboard/api/institute/repositories"
-	instituteService "gihub.com/toufiq-austcse/vNoticeboard/api/institute/services"
 	"gihub.com/toufiq-austcse/vNoticeboard/common/database"
 	"github.com/gin-gonic/gin"
 )
@@ -14,13 +13,17 @@ import (
 var (
 	db                  = database.SetupDBConnection()
 	instituteRepository = repositories.New(db)
-	myInstituteService  = instituteService.NewInstituteService(instituteRepository)
+	myInstituteService  = services.NewInstituteService(instituteRepository)
 	//instituteController controllers.InstituteController   = controllers.NewInstituteController(myInstituteService)
 
-	myAuthService = authService.NewAuthService(myInstituteService)
-	myJwtService  = authService.NewJWtService()
+	noticeRepository = repositories.NewNoticeRepository(db)
+	myNoticeService  = services.NewNoticeService(noticeRepository)
 
-	myAuthController = authController.New(myAuthService, myJwtService)
+	myAuthService = services.NewAuthService(myInstituteService)
+	myJwtService  = services.NewJWtService()
+
+	myAuthController   = controllers.NewAuthController(myAuthService, myJwtService)
+	myNoticeController = controllers.NewNoticeController(myNoticeService)
 )
 
 func main() {
@@ -33,6 +36,14 @@ func main() {
 		authRoutes.POST("/login", myAuthController.Login)
 		authRoutes.GET("/me", middleware.JwtAuthMiddleware(myJwtService, myInstituteService), myAuthController.Me)
 
+	}
+	noticeRoutes := r.Group("api/notices", middleware.JwtAuthMiddleware(myJwtService, myInstituteService))
+	{
+		noticeRoutes.POST("/", myNoticeController.Insert)
+		noticeRoutes.GET("/", myNoticeController.All)
+		noticeRoutes.GET("/:notice_id", myNoticeController.FindOne)
+		noticeRoutes.DELETE("/:notice_id", myNoticeController.Delete)
+		noticeRoutes.PATCH("/:notice_id", myNoticeController.Update)
 	}
 	r.Run()
 }

@@ -2,8 +2,7 @@ package middleware
 
 import (
 	"fmt"
-	"gihub.com/toufiq-austcse/vNoticeboard/api/auth/services"
-	instituteService "gihub.com/toufiq-austcse/vNoticeboard/api/institute/services"
+	"gihub.com/toufiq-austcse/vNoticeboard/api/services"
 	"gihub.com/toufiq-austcse/vNoticeboard/common/helper"
 	"github.com/dgrijalva/jwt-go"
 	"github.com/gin-gonic/gin"
@@ -13,7 +12,7 @@ import (
 	"strings"
 )
 
-func JwtAuthMiddleware(jwtService services.JwtService, instituteService instituteService.InstituteService) gin.HandlerFunc {
+func JwtAuthMiddleware(jwtService services.JwtService, instituteService services.InstituteService) gin.HandlerFunc {
 	return func(context *gin.Context) {
 		authHeader := context.GetHeader("Authorization")
 

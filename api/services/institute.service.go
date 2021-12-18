@@ -1,8 +1,8 @@
 package services
 
 import (
-	"gihub.com/toufiq-austcse/vNoticeboard/api/institute/entities"
-	"gihub.com/toufiq-austcse/vNoticeboard/api/institute/repositories"
+	"gihub.com/toufiq-austcse/vNoticeboard/api/entities"
+	"gihub.com/toufiq-austcse/vNoticeboard/api/repositories"
 )
 
 type InstituteService struct {

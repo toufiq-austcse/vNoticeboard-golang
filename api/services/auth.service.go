@@ -1,19 +1,18 @@
 package services
 
 import (
-	"gihub.com/toufiq-austcse/vNoticeboard/api/auth/dtos/req"
-	"gihub.com/toufiq-austcse/vNoticeboard/api/institute/entities"
-	"gihub.com/toufiq-austcse/vNoticeboard/api/institute/services"
+	"gihub.com/toufiq-austcse/vNoticeboard/api/dto/req"
+	"gihub.com/toufiq-austcse/vNoticeboard/api/entities"
 	"github.com/mashingan/smapping"
 	"golang.org/x/crypto/bcrypt"
 	"log"
 )
 
 type AuthService struct {
-	InstituteService services.InstituteService
+	InstituteService InstituteService
 }
 
-func NewAuthService(instituteService services.InstituteService) AuthService {
+func NewAuthService(instituteService InstituteService) AuthService {
 	return AuthService{
 		InstituteService: instituteService,
 	}

@@ -1,7 +1,7 @@
 package validators
 
 import (
-	"gihub.com/toufiq-austcse/vNoticeboard/api/auth/dtos/req"
+	"gihub.com/toufiq-austcse/vNoticeboard/api/dto/req"
 	"github.com/gin-gonic/gin"
 	"github.com/go-playground/validator/v10"
 	"net/http"

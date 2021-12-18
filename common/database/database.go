@@ -2,8 +2,7 @@ package database
 
 import (
 	"fmt"
-	instituteEntity "gihub.com/toufiq-austcse/vNoticeboard/api/institute/entities"
-	noticeEntity "gihub.com/toufiq-austcse/vNoticeboard/api/notice/entities"
+	instituteEntity "gihub.com/toufiq-austcse/vNoticeboard/api/entities"
 	"github.com/joho/godotenv"
 	"log"
 
@@ -29,7 +28,7 @@ func SetupDBConnection() *gorm.DB {
 	}
 	fmt.Println("Connected To DB")
 	fmt.Println("Migrating....")
-	db.AutoMigrate(instituteEntity.Institute{}, noticeEntity.Notice{})
+	db.AutoMigrate(instituteEntity.Institute{}, instituteEntity.Notice{})
 	return db
 }
 
